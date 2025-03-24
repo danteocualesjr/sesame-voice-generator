@@ -118,92 +118,277 @@ def refresh_voices():
 
 # CSS for styling
 css = """
+:root {
+    --primary-color: #7C3AED;
+    --primary-light: #DDD6FE;
+    --primary-dark: #5B21B6;
+    --gradient-start: #7C3AED;
+    --gradient-end: #2563EB;
+    --text-primary: #1F2937;
+    --text-secondary: #4B5563;
+    --bg-color: #F9FAFB;
+    --panel-bg: #FFFFFF;
+    --success-color: #10B981;
+    --error-color: #EF4444;
+    --warning-color: #F59E0B;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
-    padding-top: 1.5rem;
+    padding: 2rem 1rem;
 }
 
 #header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 #header h1 {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
+    font-weight: 800;
     margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.025em;
 }
 
 #header p {
-    font-size: 1.2rem;
-    color: #666;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .panel {
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background: white;
-    margin-bottom: 1.5rem;
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-md);
+    background: var(--panel-bg);
+    margin-bottom: 1.75rem;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+.panel:hover {
+    box-shadow: var(--shadow-lg);
 }
 
 .btn {
-    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     border: none;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-md);
+    opacity: 0.95;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-light);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-light);
+    color: var(--primary-dark);
 }
 
 .status-success {
-    color: #10B981;
-    font-weight: bold;
+    color: var(--success-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .status-error {
-    color: #EF4444;
-    font-weight: bold;
+    color: var(--error-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-warning {
+    color: var(--warning-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.panel-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.panel-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
 }
 
 .about-section {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    border-radius: 12px;
-    background: #f9f9f9;
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--panel-bg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .about-section h2 {
-    color: #333;
+    color: var(--text-primary);
     margin-top: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.about-section h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.feature-list {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-list li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
 .footer {
     text-align: center;
-    margin-top: 2rem;
-    color: #666;
-    font-size: 0.9rem;
+    margin-top: 3rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
 }
 
-.tab-nav button {
-    font-weight: bold;
+.tabs-container .tab-nav {
+    background: transparent;
+    padding: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.tabs-container button {
+    font-weight: 600;
     font-size: 1.1rem;
-    padding: 10px 20px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-secondary);
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    border-radius: 0;
+    margin-right: 1rem;
 }
 
-.active-tab {
-    border-bottom: 3px solid #4776E6;
+.tabs-container button.selected {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+.audio-container {
+    border: 2px dashed var(--primary-light);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    background-color: rgba(124, 58, 237, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.voice-select-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+[data-testid="textbox"] textarea {
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0.75rem;
+    transition: var(--transition);
+}
+
+[data-testid="textbox"] textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+[data-testid="textbox"] label, 
+[data-testid="dropdown"] label,
+[data-testid="audio"] label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+[data-testid="dropdown"] select {
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+[data-testid="button"] {
+    border-radius: var(--radius-md);
 }
 """
 
@@ -212,13 +397,15 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
     with gr.Column(elem_classes="container"):
         with gr.Column(elem_id="header"):
             gr.Markdown("# Sesame CSM-1B Voice Generator")
-            gr.Markdown("Generate natural-sounding speech with voice cloning capabilities")
+            gr.Markdown("Create natural-sounding speech with advanced voice cloning technology")
         
-        with gr.Tabs() as tabs:
+        with gr.Tabs(elem_classes="tabs-container") as tabs:
             # Standard TTS Tab
-            with gr.TabItem("Text to Speech", elem_classes="tab-nav") as standard_tab:
+            with gr.TabItem("✨ Text to Speech", elem_classes="tab-nav") as standard_tab:
                 with gr.Column(elem_classes="panel"):
-                    gr.Markdown("### Generate Speech")
+                    gr.Markdown('<h3 class="panel-title">🔊 Generate Speech</h3>')
+                    gr.Markdown('<p class="panel-subtitle">Enter your text below and convert it to natural-sounding speech.</p>')
+                    
                     text_input = gr.Textbox(
                         label="Text to speak", 
                         lines=5, 
@@ -228,9 +415,11 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
                         label="Voice Preset (optional)", 
                         placeholder="Leave empty for default voice"
                     )
-                    generate_button = gr.Button("Generate Speech", elem_classes="btn")
+                    generate_button = gr.Button("🔊 Generate Speech", elem_classes="btn")
                     
-                    audio_output = gr.Audio(label="Generated Speech")
+                    with gr.Column(elem_classes="audio-container"):
+                        audio_output = gr.Audio(label="Generated Speech")
+                        
                     status = gr.Textbox(
                         label="Status", 
                         interactive=False,
@@ -238,21 +427,24 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
                     )
             
             # Voice Cloning Tab
-            with gr.TabItem("Voice Cloning", elem_classes="tab-nav") as cloning_tab:
+            with gr.TabItem("👤 Voice Cloning", elem_classes="tab-nav") as cloning_tab:
                 with gr.Column(elem_classes="panel"):
-                    gr.Markdown("### Clone Your Voice")
-                    gr.Markdown("Upload an audio file of your voice to create a voice model for synthesis.")
+                    gr.Markdown('<h3 class="panel-title">🎙️ Clone Your Voice</h3>')
+                    gr.Markdown('<p class="panel-subtitle">Upload an audio file of your voice to create a personalized voice model.</p>')
                     
                     audio_upload = gr.Audio(
-                        label="Upload Voice Sample (5-10 seconds of clear speech recommended)",
-                        type="filepath"
+                        label="Upload Voice Sample",
+                        type="filepath",
+                        elem_id="voice-upload"
                     )
+                    gr.Markdown('<small>5-10 seconds of clear speech recommended for best results</small>')
+                    
                     voice_name_input = gr.Textbox(
                         label="Voice Name", 
                         placeholder="Enter a name for this voice..."
                     )
                     
-                    clone_button = gr.Button("Clone Voice", elem_classes="btn")
+                    clone_button = gr.Button("👤 Clone Voice", elem_classes="btn")
                     clone_status = gr.Textbox(
                         label="Cloning Status", 
                         interactive=False,
@@ -260,7 +452,8 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
                     )
                 
                 with gr.Column(elem_classes="panel"):
-                    gr.Markdown("### Generate Speech with Cloned Voice")
+                    gr.Markdown('<h3 class="panel-title">🎯 Generate Speech with Cloned Voice</h3>')
+                    gr.Markdown('<p class="panel-subtitle">Use your cloned voice to generate personalized speech.</p>')
                     
                     cloned_text_input = gr.Textbox(
                         label="Text to speak", 
@@ -268,13 +461,13 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
                         placeholder="Enter the text you want to convert to speech..."
                     )
                     
-                    with gr.Row():
+                    with gr.Row(elem_classes="voice-select-row"):
                         cloned_voice_dropdown = gr.Dropdown(
                             label="Select Cloned Voice",
                             choices=voice_cloning.list_available_voices(),
                             interactive=True
                         )
-                        refresh_button = gr.Button("🔄 Refresh", size="sm")
+                        refresh_button = gr.Button("🔄 Refresh", size="sm", elem_classes="btn-secondary")
                     
                     cloned_voice_status = gr.Textbox(
                         label="Status",
@@ -282,8 +475,11 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
                         placeholder="Status will appear here..."
                     )
                     
-                    generate_cloned_button = gr.Button("Generate Speech with Cloned Voice", elem_classes="btn")
-                    cloned_audio_output = gr.Audio(label="Generated Speech")
+                    generate_cloned_button = gr.Button("🔊 Generate with Cloned Voice", elem_classes="btn")
+                    
+                    with gr.Column(elem_classes="audio-container"):
+                        cloned_audio_output = gr.Audio(label="Generated Speech")
+                        
                     cloned_status = gr.Textbox(
                         label="Status", 
                         interactive=False,
@@ -295,17 +491,23 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
             ## About This Tool
             
             This application uses Sesame's CSM-1B voice AI model through Hugging Face's API to generate realistic speech 
-            and clone voices.
+            and clone voices with advanced technology.
             
-            ### Text to Speech
+            ### Features
             
-            Use the first tab to generate speech with the default voice or preset voices.
+            <ul class="feature-list">
+                <li>Generate natural-sounding speech with customizable presets</li>
+                <li>Clone voices using just a short audio sample</li>
+                <li>Create personalized speech with your own voice</li>
+                <li>High-quality audio output for various applications</li>
+            </ul>
             
-            ### Voice Cloning
+            ### How to Use
             
-            Use the second tab to:
-            1. Clone your voice by uploading an audio sample
-            2. Generate speech using your cloned voice
+            <ul class="feature-list">
+                <li><strong>Text to Speech:</strong> Enter your text and generate speech instantly</li>
+                <li><strong>Voice Cloning:</strong> Upload a voice sample, name it, and use it to generate personalized speech</li>
+            </ul>
             
             ### Note
             
@@ -314,7 +516,7 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
             """)
             
         with gr.Column(elem_classes="footer"):
-            gr.Markdown("Created with Gradio • Powered by Sesame CSM-1B")
+            gr.Markdown("Created with Gradio • Powered by Sesame CSM-1B • © 2023")
                 
     # Define connections
     generate_button.click(
