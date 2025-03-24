@@ -1,0 +1,4 @@
+requests>=2.31.0
+huggingface_hub>=0.19.4
+python-dotenv>=1.0.0
+gradio>=4.12.0
