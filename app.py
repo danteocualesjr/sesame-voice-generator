@@ -21,19 +21,27 @@ except ValueError as e:
 
 def generate_speech(text, voice_preset=None):
     """
-    Generate speech from text and return the audio file path.
+    Generate speech from text and return the audio file path and status message.
     
     Args:
         text (str): Text to convert to speech
         voice_preset (str, optional): Voice preset to use
         
     Returns:
-        str: Path to the generated audio file
+        tuple: (audio_path, status_message)
     """
     if not text:
-        return None
+        return None, "Please enter some text to convert to speech."
     
-    return tts_client.generate_speech(text, voice_preset=voice_preset if voice_preset else None)
+    print(f"Generating speech for: {text}")
+    print(f"Voice preset: {voice_preset if voice_preset else 'default'}")
+    
+    result = tts_client.generate_speech(text, voice_preset=voice_preset if voice_preset else None)
+    
+    if result:
+        return result, "Speech generated successfully!"
+    else:
+        return None, "The Hugging Face API is currently unavailable. Please try again later."
 
 # Create the Gradio interface
 with gr.Blocks(title="Sesame CSM-1B Voice Generator") as demo:
@@ -55,11 +63,16 @@ with gr.Blocks(title="Sesame CSM-1B Voice Generator") as demo:
         
         with gr.Column():
             audio_output = gr.Audio(label="Generated Speech")
+            status_message = gr.Textbox(
+                label="Status", 
+                interactive=False,
+                placeholder="Status will appear here..."
+            )
             
     generate_button.click(
         generate_speech, 
         inputs=[text_input, voice_preset], 
-        outputs=audio_output
+        outputs=[audio_output, status_message]
     )
     
     gr.Markdown("""
@@ -73,7 +86,8 @@ with gr.Blocks(title="Sesame CSM-1B Voice Generator") as demo:
     4. Listen to the generated audio
     
     ### Note
-    The first generation might take longer as the model loads.
+    The first generation might take longer as the model loads. If you see a "Service Unavailable" message,
+    the Hugging Face API might be experiencing high traffic or maintenance. Please try again later.
     """)
 
 # Launch the app
