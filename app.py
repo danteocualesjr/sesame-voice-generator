@@ -119,47 +119,70 @@ def refresh_voices():
 # CSS for styling
 css = """
 :root {
-    --primary-color: #6366F1;
-    --primary-light: #C7D2FE;
-    --primary-dark: #4338CA;
+    /* Modern Color Palette */
+    --primary-color: #4F46E5;
+    --primary-light: #E0E7FF;
+    --primary-dark: #3730A3;
     --accent-color: #F43F5E;
-    --accent-light: #FBD5DA;
-    --gradient-start: #6366F1;
-    --gradient-mid: #8B5CF6;
+    --accent-light: #FFE4E6;
+    --gradient-start: #4F46E5;
+    --gradient-mid: #7C3AED;
     --gradient-end: #EC4899;
-    --text-primary: #111827;
-    --text-secondary: #4B5563;
-    --bg-color: #F8FAFC;
-    --panel-bg: rgba(255, 255, 255, 0.85);
-    --success-color: #10B981;
-    --error-color: #EF4444;
-    --warning-color: #F59E0B;
-    --radius-sm: 6px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 20px;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    
+    /* Neutral Colors */
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --bg-color: #F9FAFB;
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    
+    /* Status Colors */
+    --success-color: #059669;
+    --error-color: #DC2626;
+    --warning-color: #D97706;
+    
+    /* Design System */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.08);
+    
+    /* Effects */
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --blur: 8px;
+    --blur: 12px;
+    
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2rem;
+    --space-6: 3rem;
 }
 
 body {
-    background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+    background: linear-gradient(135deg, #F9FAFB 0%, #EEF2FF 100%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     margin: 0;
     min-height: 100vh;
+    line-height: 1.6;
 }
 
 .container {
     max-width: 1200px;
     margin: auto;
-    padding: 1.5rem 1rem;
+    padding: var(--space-5) var(--space-4);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
 }
 
 .container::before {
@@ -169,8 +192,9 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+    background: radial-gradient(circle at center, rgba(79, 70, 229, 0.03) 0%, transparent 50%);
     z-index: -1;
+    pointer-events: none;
 }
 
 .container::after {
@@ -180,16 +204,18 @@ body {
     right: -30%;
     width: 80%;
     height: 80%;
-    background: radial-gradient(circle at center, rgba(236, 72, 153, 0.05) 0%, transparent 60%);
+    background: radial-gradient(circle at center, rgba(236, 72, 153, 0.03) 0%, transparent 60%);
     z-index: -1;
+    pointer-events: none;
 }
 
 .decorative-shape {
     position: absolute;
     border-radius: 50%;
-    filter: blur(70px);
-    opacity: 0.4;
+    filter: blur(100px);
+    opacity: 0.25;
     z-index: -1;
+    pointer-events: none;
 }
 
 .shape-1 {
