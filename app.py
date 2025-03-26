@@ -376,27 +376,27 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
     # Add theme toggle script to the head
     gr.HTML("""
         <script>
-            function toggleTheme() {
-                const root = document.documentElement;
-                const currentTheme = root.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                root.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                
-                // Update button text
-                const button = document.querySelector('.theme-toggle');
-                button.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-            }
-            
-            // Initialize theme
-            document.addEventListener('DOMContentLoaded', () => {
+            // Wait for the page to load
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize theme
                 const savedTheme = localStorage.getItem('theme');
                 if (savedTheme) {
                     document.documentElement.setAttribute('data-theme', savedTheme);
-                    const button = document.querySelector('.theme-toggle');
-                    if (button) {
-                        button.textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-                    }
+                }
+                
+                // Add click handler to theme toggle button
+                const themeButton = document.querySelector('.theme-toggle');
+                if (themeButton) {
+                    themeButton.addEventListener('click', function() {
+                        const root = document.documentElement;
+                        const currentTheme = root.getAttribute('data-theme');
+                        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                        root.setAttribute('data-theme', newTheme);
+                        localStorage.setItem('theme', newTheme);
+                        
+                        // Update button text
+                        this.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+                    });
                 }
             });
         </script>
@@ -404,17 +404,10 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
     
     with gr.Column(elem_classes="container"):
         # Theme toggle button
-        theme_btn = gr.Button(
+        gr.Button(
             "🌙 Dark Mode",
             elem_classes="theme-toggle",
             size="sm"
-        )
-        
-        theme_btn.click(
-            None,
-            None,
-            None,
-            _js="toggleTheme"
         )
         
         # Decorative shapes
