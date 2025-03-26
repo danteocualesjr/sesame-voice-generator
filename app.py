@@ -373,12 +373,48 @@ body {
 
 # Create the Gradio interface
 with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.Soft()) as demo:
+    # Add theme toggle script to the head
+    gr.HTML("""
+        <script>
+            function toggleTheme() {
+                const root = document.documentElement;
+                const currentTheme = root.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Update button text
+                const button = document.querySelector('.theme-toggle');
+                button.textContent = newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+            }
+            
+            // Initialize theme
+            document.addEventListener('DOMContentLoaded', () => {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                    const button = document.querySelector('.theme-toggle');
+                    if (button) {
+                        button.textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+                    }
+                }
+            });
+        </script>
+    """)
+    
     with gr.Column(elem_classes="container"):
         # Theme toggle button
-        theme_toggle = gr.Button(
+        theme_btn = gr.Button(
             "🌙 Dark Mode",
             elem_classes="theme-toggle",
             size="sm"
+        )
+        
+        theme_btn.click(
+            None,
+            None,
+            None,
+            _js="toggleTheme"
         )
         
         # Decorative shapes
@@ -541,32 +577,6 @@ with gr.Blocks(css=css, title="Sesame CSM-1B Voice Generator", theme=gr.themes.S
         inputs=[cloned_text_input, cloned_voice_dropdown],
         outputs=[cloned_audio_output, cloned_status]
     )
-
-# Add theme toggle functionality
-def toggle_theme():
-    return """
-    <script>
-    function toggleTheme() {
-        const root = document.documentElement;
-        const currentTheme = root.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    }
-    
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-    
-    // Add click handler to theme toggle button
-    document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
-    </script>
-    """
-
-# Add the theme toggle script to the interface
-demo.load(toggle_theme)
 
 # Launch the app
 if __name__ == "__main__":
