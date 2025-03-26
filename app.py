@@ -120,25 +120,25 @@ def refresh_voices():
 css = """
 :root {
     /* Modern Color Palette */
-    --primary-color: #4F46E5;
+    --primary-color: #6366F1;
     --primary-light: #E0E7FF;
-    --primary-dark: #3730A3;
+    --primary-dark: #4338CA;
     --accent-color: #F43F5E;
     --accent-light: #FFE4E6;
-    --gradient-start: #4F46E5;
-    --gradient-mid: #7C3AED;
+    --gradient-start: #6366F1;
+    --gradient-mid: #8B5CF6;
     --gradient-end: #EC4899;
     
     /* Neutral Colors */
     --text-primary: #1F2937;
     --text-secondary: #6B7280;
-    --bg-color: #F9FAFB;
-    --panel-bg: rgba(255, 255, 255, 0.95);
+    --bg-color: #F8FAFC;
+    --panel-bg: rgba(255, 255, 255, 0.8);
     
     /* Status Colors */
-    --success-color: #059669;
-    --error-color: #DC2626;
-    --warning-color: #D97706;
+    --success-color: #10B981;
+    --error-color: #EF4444;
+    --warning-color: #F59E0B;
     
     /* Design System */
     --radius-sm: 8px;
@@ -166,7 +166,7 @@ css = """
 }
 
 body {
-    background: linear-gradient(135deg, #F9FAFB 0%, #EEF2FF 100%);
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -192,7 +192,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at center, rgba(79, 70, 229, 0.03) 0%, transparent 50%);
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.03) 0%, transparent 50%);
     z-index: -1;
     pointer-events: none;
 }
@@ -242,7 +242,7 @@ body {
 }
 
 #header h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: var(--space-3);
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
@@ -320,7 +320,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
     position: relative;
     overflow: hidden;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -339,7 +339,7 @@ body {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
 }
 
 .btn:hover::before {
@@ -378,19 +378,19 @@ body {
 
 .status-success {
     color: var(--success-color);
-    background-color: rgba(5, 150, 105, 0.05);
+    background-color: rgba(16, 185, 129, 0.05);
     border-left-color: var(--success-color);
 }
 
 .status-error {
     color: var(--error-color);
-    background-color: rgba(220, 38, 38, 0.05);
+    background-color: rgba(239, 68, 68, 0.05);
     border-left-color: var(--error-color);
 }
 
 .status-warning {
     color: var(--warning-color);
-    background-color: rgba(217, 119, 6, 0.05);
+    background-color: rgba(245, 158, 11, 0.05);
     border-left-color: var(--warning-color);
 }
 
@@ -575,7 +575,7 @@ body {
 
 .tabs-container button:hover:not(.selected) {
     color: var(--primary-dark);
-    background: rgba(79, 70, 229, 0.05);
+    background: rgba(99, 102, 241, 0.05);
 }
 
 .pill {
@@ -588,7 +588,7 @@ body {
     margin-bottom: var(--space-3);
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     color: white;
-    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
     letter-spacing: 0.02em;
     text-transform: uppercase;
 }
@@ -597,7 +597,7 @@ body {
     border: 2px dashed var(--primary-light);
     border-radius: var(--radius-lg);
     padding: var(--space-4);
-    background: rgba(79, 70, 229, 0.03);
+    background: rgba(99, 102, 241, 0.03);
     margin: var(--space-4) 0;
     transition: var(--transition);
     position: relative;
@@ -605,7 +605,7 @@ body {
 
 .audio-container:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
 }
 
 .audio-container::before {
